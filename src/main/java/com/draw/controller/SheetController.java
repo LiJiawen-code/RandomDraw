@@ -1,0 +1,56 @@
+package com.draw.controller;
+
+
+import com.draw.domain.Sheet;
+import com.draw.service.SheetService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import com.draw.domain.FebsResponse;
+
+@RestController
+@RequestMapping("/sheet")
+public class SheetController {
+    @Autowired
+    SheetService sheetService;
+
+    @PostMapping("/insert")
+    public FebsResponse insertBySheet(Sheet sheet) throws Exception{
+        try {
+            sheetService.insertSheet(sheet);
+            return new FebsResponse().code("200").message("查询成功").data(sheet);
+        } catch (Exception e) {
+            return new FebsResponse().code("500").message("查询失败");
+        }
+    }
+
+    @GetMapping("/deleteById")
+    public FebsResponse deleteSheetInfo(Integer id) throws Exception {
+        try {
+            sheetService.deleteSheet(id);
+            return new FebsResponse().code("200").message("删除成功");
+        } catch (Exception e) {
+            return new FebsResponse().code("500").message("删除失败");
+        }
+    }
+
+    @GetMapping("/update")
+    public FebsResponse updateSheetInfo(Sheet sheet) throws Exception {
+        try {
+            sheetService.updateSheet(sheet);
+            return new FebsResponse().code("200").message("更新成功");
+        } catch (Exception e) {
+            return new FebsResponse().code("500").message("更新失败");
+        }
+    }
+
+    @GetMapping("/findById/{id}")
+    public FebsResponse findBySheetId(@PathVariable("id") Integer id) throws Exception {
+        try {
+            Sheet sheet = sheetService.selectSheet(id);
+            return new FebsResponse().code("200").message("查询成功").data(sheet);
+        } catch (Exception e) {
+            return new FebsResponse().code("500").message("查询失败");
+        }
+    }
+
+}
