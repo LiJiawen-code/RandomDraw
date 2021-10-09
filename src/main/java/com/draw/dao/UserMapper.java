@@ -10,18 +10,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 @TableName("User")
 public interface UserMapper extends BaseMapper<User> {
-    /**
-     *随机抽签
-     *
-     * @return
-     */
-    int getRandomDrawing();
-
-    /**
-     *获取签池的签的最大Id
-     *
-     * @return
-     */
-//    int getDrawingMaxId();
-
 }

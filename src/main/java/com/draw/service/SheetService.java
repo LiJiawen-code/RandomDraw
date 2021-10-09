@@ -19,4 +19,8 @@ public interface SheetService {
      * 查
      */
     Sheet selectSheet(Integer id);
+    /**
+     * 查询id最大值
+     */
+    int selectSheetMaxId();
 }

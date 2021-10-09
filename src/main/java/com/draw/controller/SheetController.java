@@ -53,4 +53,15 @@ public class SheetController {
         }
     }
 
+//    @GetMapping("/findMaxId")
+//    public FebsResponse findBySheetId() throws Exception {
+//        try {
+//            int MaxId = sheetService.selectSheetMaxId();
+//            return new FebsResponse().code("200").message("查询成功").data(MaxId);
+//        } catch (Exception e) {
+//            return new FebsResponse().code("500").message("查询失败");
+//        }
+//    }
+
+
 }
