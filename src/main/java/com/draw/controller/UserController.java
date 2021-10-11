@@ -32,7 +32,7 @@ public class UserController {
         //查询显示
         try {
             User user1 = userService.saveUser(user);
-            return new FebsResponse().code("200").message("抽签成功,已保存至用户").data(user1.getDrawingId()).data(user1);
+            return new FebsResponse().code("200").message("抽签成功,已保存至用户！").data(user1.getDrawingId()).data(user1);
         } catch (Exception e) {
             return new FebsResponse().code("500").message("抽签失败！每位用户每天只能进行一次抽签，请勿重复抽签！");
         }
