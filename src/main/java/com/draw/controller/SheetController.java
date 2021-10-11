@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.draw.domain.FebsResponse;
 
+/**
+ * @author Lee
+ */
 @RestController
 @RequestMapping("/sheet")
 public class SheetController {
@@ -14,7 +17,7 @@ public class SheetController {
     SheetService sheetService;
 
     @PostMapping("/insert")
-    public FebsResponse insertBySheet(Sheet sheet) throws Exception{
+    public FebsResponse insertBySheet(Sheet sheet) {
         try {
             sheetService.insertSheet(sheet);
             return new FebsResponse().code("200").message("查询成功").data(sheet);
@@ -24,7 +27,7 @@ public class SheetController {
     }
 
     @GetMapping("/deleteById")
-    public FebsResponse deleteSheetInfo(Integer id) throws Exception {
+    public FebsResponse deleteSheetInfo(Integer id) {
         try {
             sheetService.deleteSheet(id);
             return new FebsResponse().code("200").message("删除成功");
@@ -34,7 +37,7 @@ public class SheetController {
     }
 
     @GetMapping("/update")
-    public FebsResponse updateSheetInfo(Sheet sheet) throws Exception {
+    public FebsResponse updateSheetInfo(Sheet sheet) {
         try {
             sheetService.updateSheet(sheet);
             return new FebsResponse().code("200").message("更新成功");
@@ -44,7 +47,7 @@ public class SheetController {
     }
 
     @GetMapping("/findById/{id}")
-    public FebsResponse findBySheetId(@PathVariable("id") Integer id) throws Exception {
+    public FebsResponse findBySheetId(@PathVariable("id") Integer id) {
         try {
             Sheet sheet = sheetService.selectSheet(id);
             return new FebsResponse().code("200").message("查询成功").data(sheet);

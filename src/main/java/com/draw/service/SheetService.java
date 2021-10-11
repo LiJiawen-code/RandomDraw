@@ -6,15 +6,15 @@ public interface SheetService {
     /**
      * 增
      */
-    int insertSheet(Sheet sheet);
+    void insertSheet(Sheet sheet);
     /**
      * 删
      */
-    int deleteSheet(Integer id);
+    void deleteSheet(Integer id);
     /**
      * 改
      */
-    int updateSheet(Sheet sheet);
+    void updateSheet(Sheet sheet);
     /**
      * 查
      */

@@ -6,6 +6,9 @@ import com.draw.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author Lee
+ */
 @Mapper
 @Repository
 @TableName("User")

@@ -6,15 +6,15 @@ import com.draw.domain.User;
 import com.draw.service.SheetService;
 import com.draw.service.UserService;
 import com.draw.utils.GetIp;
-import com.mysql.cj.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.swing.*;
 import java.sql.Date;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Lee
+ */
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -23,10 +23,9 @@ public class UserServiceImpl implements UserService {
     SheetService sheetService;
 
     @Override
-    public int getRandomDrawingId(Integer MaxNum){
+    public int getRandomDrawingId(Integer maxNum){
         Random r = new Random();
-        int RandomDrawingId = r.nextInt(MaxNum-1)+1;
-        return RandomDrawingId;
+        return r.nextInt(maxNum-1)+1;
     }
 
     @Override
@@ -43,8 +42,8 @@ public class UserServiceImpl implements UserService {
         user.setDate(date);
         //根据ip和date验证，每天只可以抽签一次
         List<User> listUser = selectByIp(userIp);
-        for (int i = 0; i < listUser.size(); i++) {
-            if (listUser.get(i).getDate().toString().equals(date.toString())) {
+        for (User value : listUser) {
+            if (value.getDate().toString().equals(date.toString())) {
                 return null;
             }
         }

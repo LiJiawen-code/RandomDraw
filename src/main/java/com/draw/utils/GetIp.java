@@ -5,7 +5,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
+/**
+ * @author Lee
+ */
 @Configuration
 public class GetIp {
     /**
@@ -14,11 +18,11 @@ public class GetIp {
      * ------------
      */
     public static String getIpAddr() {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         String ip = request.getHeader("x-forwarded-for");
         if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
             // 多次反向代理后会有多个ip值，第一个ip才是真实ip
-            if (ip.indexOf(",") != -1) {
+            if (ip.contains(",")) {
                 ip = ip.split(",")[0];
             }
         }
@@ -39,7 +43,7 @@ public class GetIp {
         }
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
-            if (ip.equals("127.0.0.1")||ip.equals("0:0:0:0:0:0:0:1")) {
+            if ("127.0.0.1".equals(ip)|| "0:0:0:0:0:0:0:1".equals(ip)) {
                 ip = "127.0.0.1";
             }
         }

@@ -24,8 +24,8 @@ public class UserController {
 
     /**
      *
-     * @param user
-     * @return
+     * @param user User
+     * @return FebsResponse
      */
     @GetMapping("/getRandomDrawingIdAndSave")
     public FebsResponse getRandomDrawingIdAndSave(User user) {

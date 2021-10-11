@@ -7,6 +7,9 @@ import com.draw.service.SheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author Lee
+ */
 @Service
 public class SheetServiceImpl implements SheetService {
     @Autowired
@@ -15,51 +18,46 @@ public class SheetServiceImpl implements SheetService {
     /**
      * 插入数据
      *
-     * @param sheet
-     * @return
+     * @param sheet Sheet
      */
     @Override
-    public int insertSheet(Sheet sheet) {
-        return sheetMapper.insert(sheet);
+    public void insertSheet(Sheet sheet) {
+        sheetMapper.insert(sheet);
     }
 
     /**
      * 根据id删除数据
      *
-     * @param id
-     * @return
+     * @param id 要删除的id
      */
     @Override
-    public int deleteSheet(Integer id) {
+    public void deleteSheet(Integer id) {
         if (id == 0) {
             System.out.println("id不能为空");
-            return 0;
         } else {
-            return sheetMapper.deleteById(id);
+            sheetMapper.deleteById(id);
         }
     }
 
     /**
      * 修改数据
      *
-     * @param sheet
-     * @return
+     * @param sheet Sheet
      */
     @Override
-    public int updateSheet(Sheet sheet) {
+    public void updateSheet(Sheet sheet) {
         if (sheet.getId() == 0) {
             System.out.println("id不能为空");
-            return 0;
         } else {
-            return sheetMapper.updateById(sheet);
+            sheetMapper.updateById(sheet);
         }
     }
 
     /**
      * 根据id查找数据
      *
-     * @param id
-     * @return
+     * @param id 要查询的id
+     * @return Sheet
      */
     @Override
     public Sheet selectSheet(Integer id) {
@@ -74,14 +72,13 @@ public class SheetServiceImpl implements SheetService {
     /**
      * 查找签池中最大的id值
      *
-     * @return
+     * @return 返回签池最大值，也就是签数
      */
     @Override
     public int selectSheetMaxId() {
         QueryWrapper<Sheet> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda()
                 .orderByDesc(Sheet::getId).last("limit 1");
-        int DrawingMaxId = sheetMapper.selectOne(queryWrapper).getId();
-        return DrawingMaxId;
+        return sheetMapper.selectOne(queryWrapper).getId();
     }
 }
