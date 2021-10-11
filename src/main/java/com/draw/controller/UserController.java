@@ -1,19 +1,18 @@
 package com.draw.controller;
 
-
 import com.draw.domain.FebsResponse;
-import com.draw.domain.Sheet;
 import com.draw.domain.User;
 import com.draw.service.SheetService;
 import com.draw.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Random;
 
+/**
+ * @author Lee
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -28,23 +27,14 @@ public class UserController {
      * @param user
      * @return
      */
-    @GetMapping("/getRandomDrawingId")
-    public FebsResponse getRandomDrawingIdAndSave(User user){
-        int SheetNum = sheetService.selectSheetMaxId();
-        int getNum = userService.getRandomDrawingId(SheetNum);
-        user.setDrawingId(getNum);
-
+    @GetMapping("/getRandomDrawingIdAndSave")
+    public FebsResponse getRandomDrawingIdAndSave(User user) {
         //查询显示
         try {
-            Sheet sheet = sheetService.selectSheet(getNum);
-            return new FebsResponse().code("200").message("查询成功").data(sheet);
+            User user1 = userService.saveUser(user);
+            return new FebsResponse().code("200").message("抽签成功,已保存至用户").data(user1.getDrawingId()).data(user1);
         } catch (Exception e) {
-            return new FebsResponse().code("500").message("查询失败");
+            return new FebsResponse().code("500").message("抽签失败！每位用户每天只能进行一次抽签，请勿重复抽签！");
         }
-        //将User保存入数据库
     }
-
-
-
-
 }
