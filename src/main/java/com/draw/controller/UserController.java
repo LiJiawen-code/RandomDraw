@@ -24,11 +24,11 @@ public class UserController {
 
     /**
      *
-     * @param user User
      * @return FebsResponse
      */
     @GetMapping("/getRandomDrawingIdAndSave")
-    public FebsResponse getRandomDrawingIdAndSave(User user) {
+    public FebsResponse getRandomDrawingIdAndSave() {
+        User user = new User();
         //查询显示
         try {
             User user1 = userService.saveUser(user);
